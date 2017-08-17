@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script
+            src="http://code.jquery.com/jquery-3.2.1.js"
+            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<script src="/socket.io/socket.io.js"></script>
+
+<div id="userName">
+    <form>
+        <input class="form-control"  autofocus placeholder="Введите ваше имя">
+    </form>
+</div>
+
+<div id="room">
+    <ul></ul>
+    <form>
+        <input class="form-control" autocomplete="off" autofocus placeholder="Сообщение...">
+    </form>
+</div>
+
+<script>
+    var socket = io.connect();
+    var formName = $('#userName form');
+    formName.submit(function() {
+        var input = $(this).find('input');
+        var userName = input.val();
+        socket.emit('setUserName', userName);
+        return false;
+    });
+    socket.on('message', function(text) {
+        $('<li>', {text: text}).appendTo(ul);
+    });
+
+
+    var form = $('#room form');
+    var ul = $('#room ul');
+    form.submit(function() {
+        var input = $(this).find('input');
+        var text = (new Date).toLocaleTimeString() + ' - ' + input.val();
+        input.val('');
+        socket.emit('message', text, function(data) {
+            $('<li>', {text: text}).appendTo(ul);
+        });
+        return false;
+    });
+    socket.on('message', function(text) {
+        $('<li>', {text: text}).appendTo(ul);
+    });
+    socket.on('newUser', function(text) {
+        $('<li>', {text: text}).appendTo(ul);
+    });
+
+</script>
+
+</body>
+</html>
