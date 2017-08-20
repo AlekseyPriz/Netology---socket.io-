@@ -1,0 +1,25 @@
+{
+  "name": "socket.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlekseyPriz/Netology---socket.io-.git"
+  },
+  "author": "Priz Aleksey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlekseyPriz/Netology---socket.io-/issues"
+  },
+  "homepage": "https://github.com/AlekseyPriz/Netology---socket.io-#readme",
+  "dependencies": {
+    "express": "^4.15.4",
+    "mongodb": "^2.2.28",
+    "socket.io": "^2.0.3"
+  },
+  "engines": {"node": "7.5.0"}
+}
